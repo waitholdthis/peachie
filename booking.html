@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Appointment | Diverse Hair Designs by Peachie</title>
+<meta name="description" content="Schedule your appointment at Diverse Hair Designs by Peachie. One client at a time — personalized hair services in North Carolina.">
+<link rel="icon" type="image/webp" href="favicon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --blush: #eed6d3;
+  --blush-light: #f7ece9;
+  --blush-deep: #d4a9a4;
+  --gold: #c9a96e;
+  --gold-light: #e8d5a8;
+  --charcoal: #2a2a2a;
+  --charcoal-soft: #3d3d3d;
+  --cream: #faf6f2;
+  --cream-dark: #f0e8e0;
+  --white: #ffffff;
+  --text: #2a2a2a;
+  --text-light: #6b6060;
+  --heading: 'Cormorant Garamond', Georgia, serif;
+  --body: 'Jost', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--body);
+  color: var(--text);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+::selection { background: var(--blush); color: var(--charcoal); }
+
+/* ========== HEADER ========== */
+.header {
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--white);
+  border-bottom: 1px solid var(--cream-dark);
+  position: relative;
+  z-index: 10;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.header-logo img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-logo-text {
+  font-family: var(--heading);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--charcoal);
+  line-height: 1.2;
+}
+
+.header-logo-text span {
+  display: block;
+  font-size: 0.6em;
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blush-deep);
+}
+
+.header-back {
+  font-family: var(--body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--charcoal);
+  padding: 10px 24px;
+  border: 1px solid var(--cream-dark);
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-back:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.header-back svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ========== BOOKING HERO ========== */
+.booking-hero {
+  background: linear-gradient(160deg, var(--cream) 0%, var(--blush-light) 40%, var(--blush) 70%, var(--cream-dark) 100%);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 4rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.booking-hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -15%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 169, 110, 0.06) 0%, transparent 70%);
+}
+
+.booking-hero-label {
+  font-family: var(--body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.booking-hero h1 {
+  font-family: var(--heading);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 300;
+  color: var(--charcoal);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.booking-hero h1 em {
+  font-style: italic;
+  color: var(--blush-deep);
+}
+
+.booking-hero p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--text-light);
+  line-height: 1.7;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.booking-hero-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin: 1.25rem auto;
+}
+
+/* ========== BOOKING FRAME ========== */
+.booking-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 3rem);
+  background: var(--white);
+  position: relative;
+}
+
+.booking-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+}
+
+.booking-frame-wrapper {
+  width: 100%;
+  max-width: 900px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 700px;
+  position: relative;
+  border: 1px solid var(--cream-dark);
+  background: var(--white);
+  box-shadow: 0 4px 40px rgba(42, 42, 42, 0.04);
+}
+
+.booking-frame-wrapper iframe {
+  width: 100%;
+  flex: 1;
+  min-height: 700px;
+  border: none;
+  display: block;
+}
+
+/* Loading state */
+.booking-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  transition: opacity 0.5s ease;
+  z-index: 2;
+}
+
+.booking-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.booking-loader-spinner {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--cream-dark);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.booking-loader span {
+  font-family: var(--body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+/* ========== HELP BAR ========== */
+.booking-help {
+  padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 4vw, 4rem);
+  background: var(--cream);
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  flex-wrap: wrap;
+  border-top: 1px solid var(--cream-dark);
+}
+
+.booking-help-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-light);
+  transition: color 0.3s;
+}
+
+.booking-help-item:hover { color: var(--charcoal); }
+
+.booking-help-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--cream-dark);
+  transition: border-color 0.3s;
+}
+
+.booking-help-item:hover .booking-help-icon {
+  border-color: var(--gold);
+}
+
+.booking-help-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--gold);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.booking-help-text {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.booking-help-text strong {
+  display: block;
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  margin-bottom: 1px;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  background: var(--charcoal);
+  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 4vw, 4rem);
+  text-align: center;
+}
+
+.footer-copy {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: rgba(250, 246, 242, 0.3);
+  letter-spacing: 0.05em;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 600px) {
+  .header-logo-text { display: none; }
+
+  .booking-help {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .booking-frame-wrapper {
+    border-left: none;
+    border-right: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <a href="index.html" class="header-logo">
+    <img src="logo.webp" alt="Diverse Hair Designs by Peachie Logo">
+    <div class="header-logo-text">
+      Diverse Hair Designs
+      <span>by Peachie</span>
+    </div>
+  </a>
+  <a href="index.html" class="header-back">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to Site
+  </a>
+</header>
+
+<!-- Booking Hero -->
+<section class="booking-hero">
+  <div class="booking-hero-label">Schedule Your Visit</div>
+  <h1>Book Your <em>Experience</em></h1>
+  <div class="booking-hero-divider"></div>
+  <p>Select a service below to reserve your one-on-one appointment. Because you deserve undivided attention.</p>
+</section>
+
+<!-- Booking Embed -->
+<div class="booking-container">
+  <div class="booking-frame-wrapper">
+    <div class="booking-loader" id="bookingLoader">
+      <div class="booking-loader-spinner"></div>
+      <span>Loading booking&hellip;</span>
+    </div>
+    <iframe
+      src="https://book.squareup.com/appointments/c90sxcwmw12skd/location/LP6TAS57PHH3T/services?buttonTextColor=000000&color=eed6d3&locale=en&referrer=so"
+      title="Book an appointment at Diverse Hair Designs by Peachie"
+      id="bookingFrame"
+      onload="document.getElementById('bookingLoader').classList.add('hidden')"
+    ></iframe>
+  </div>
+</div>
+
+<!-- Help Bar -->
+<div class="booking-help">
+  <a href="tel:9109920117" class="booking-help-item">
+    <div class="booking-help-icon">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </div>
+    <div class="booking-help-text">
+      <strong>Call Us</strong>
+      910-992-0117
+    </div>
+  </a>
+  <a href="https://www.instagram.com/diversehdbypeachie" target="_blank" rel="noopener" class="booking-help-item">
+    <div class="booking-help-icon">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </div>
+    <div class="booking-help-text">
+      <strong>Follow Us</strong>
+      @diversehdbypeachie
+    </div>
+  </a>
+  <a href="index.html#services" class="booking-help-item">
+    <div class="booking-help-icon">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    </div>
+    <div class="booking-help-text">
+      <strong>View Services</strong>
+      Full menu &amp; pricing
+    </div>
+  </a>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-copy">&copy; 2026 Diverse Hair Designs by Peachie. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
