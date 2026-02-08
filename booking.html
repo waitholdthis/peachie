@@ -354,19 +354,37 @@ body::after {
 }
 
 /* ========== RESPONSIVE ========== */
-@media (max-width: 600px) {
-  .header-logo-text { display: none; }
+@media (max-width: 768px) {
+  .header { height: 68px; padding: 0 1rem; }
+  .header-logo img { height: 40px; }
+  .header-back { padding: 8px 16px; font-size: 0.65rem; letter-spacing: 0.12em; }
+
+  .booking-hero { padding: 2rem 1.25rem; }
+  .booking-hero h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+
+  .booking-container { padding: 1rem 0.75rem; }
+  .booking-frame-wrapper {
+    border-left: none;
+    border-right: none;
+    min-height: 600px;
+  }
+  .booking-frame-wrapper iframe { min-height: 600px; }
 
   .booking-help {
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
+    padding: 1.5rem 1rem;
   }
+}
 
-  .booking-frame-wrapper {
-    border-left: none;
-    border-right: none;
-  }
+@media (max-width: 400px) {
+  .header-logo-text { display: none; }
+  .header-back span { display: none; }
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .footer { padding-bottom: calc(clamp(1.5rem, 3vw, 2rem) + env(safe-area-inset-bottom)); }
 }
 </style>
 </head>
