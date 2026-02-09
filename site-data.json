@@ -1,0 +1,161 @@
+{
+  "hero": {
+    "badge": "North Carolina",
+    "heading": "Your Hair,<br>Our <em>Artistry</em>",
+    "subHeading": "One client at a time. Because you deserve undivided attention&nbsp;&amp;&nbsp;care.",
+    "ctaText": "Book Your Experience",
+    "ctaLink": "booking.html"
+  },
+  "about": {
+    "label": "Our Story",
+    "title": "Where Beauty Meets <em>Intention</em>",
+    "paragraphs": [
+      "At Diverse Hair Designs by Peachie, we believe every visit should feel like a personal retreat. Our approach is simple yet rare in today's fast-paced world — we dedicate our full attention to one client at a time.",
+      "From precision cuts to transformative color work, every service is performed with meticulous care and artistic vision. Your hair tells your story — we're here to make sure it's beautifully told."
+    ],
+    "quote": "We find it very important that our clients feel empowered, and embrace the importance of self care.",
+    "stats": [
+      { "value": "1:1", "label": "Client Attention" },
+      { "value": "100%", "label": "Dedicated Focus" }
+    ]
+  },
+  "services": [
+    {
+      "title": "Color",
+      "image": "images/service-color1.jpg",
+      "items": [
+        {
+          "name": "Full Balayage",
+          "duration": "3 hr 30 min",
+          "desc": "Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut & style.",
+          "price": "$300+"
+        },
+        {
+          "name": "Partial Highlights",
+          "duration": "2 hr 30 min",
+          "desc": "Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner & style.",
+          "price": "$190+"
+        },
+        {
+          "name": "Single Process Color",
+          "duration": "1 hr 30 min",
+          "desc": "All-over color where the entire head of hair is dyed in a single shade.",
+          "price": "$125+"
+        },
+        {
+          "name": "Root Touch-Up / Gray Coverage",
+          "duration": "1 hr 30 min",
+          "desc": "For pre-existing color or gray coverage. Single color process, max 8 weeks maintenance regrowth (at least 2 inches).",
+          "price": "$110+"
+        },
+        {
+          "name": "Color Correction",
+          "duration": "4–5 hours",
+          "desc": "Designed to fix unwanted hair color from box dye, fading, or a desire for a new transformation.",
+          "price": "Varies"
+        }
+      ]
+    },
+    {
+      "title": "Cutting",
+      "image": "images/service-cut1.jpeg",
+      "items": [
+        {
+          "name": "Cut, Wash & Style",
+          "duration": "45 min",
+          "desc": "",
+          "price": "$55+"
+        },
+        {
+          "name": "Men's Cut",
+          "duration": "",
+          "desc": "",
+          "price": "$25"
+        },
+        {
+          "name": "Girls Wash, Cut & Blow Dry",
+          "duration": "Under 12 yrs · 45 min",
+          "desc": "",
+          "price": "Call"
+        }
+      ]
+    },
+    {
+      "title": "Styling",
+      "image": "images/service-updo1.jpeg",
+      "items": [
+        {
+          "name": "Updos & Special Occasion",
+          "duration": "By consultation",
+          "desc": "From classic updos to flowing curls — styled for your special occasion.",
+          "price": "Call"
+        }
+      ]
+    },
+    {
+      "title": "Treatments",
+      "image": "images/service-treatment1.jpeg",
+      "items": [
+        {
+          "name": "Scalp Treatment",
+          "duration": "1 hour",
+          "desc": "Total scalp detox — exfoliate dead skin, remove buildup. Includes scalp scan analysis, deep cleansing, hair mask, massage & blow dry.",
+          "price": "$65+"
+        },
+        {
+          "name": "Smoothing Treatment",
+          "duration": "3 hours · Consultation required",
+          "desc": "Infuses amino acids, proteins, silk & pearl. Results last 4–5 months. Short $220 · Medium $250 · Long $300.",
+          "price": "$220–$300"
+        }
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "text": "Peachie has completely transformed my hair and my confidence. The one-on-one attention makes you feel like the only person in the world. I wouldn't trust anyone else with my color.",
+      "author": "Satisfied Client"
+    },
+    {
+      "text": "The best salon experience I've ever had. No rushing, no distractions — just pure artistry and genuine care. My balayage has never looked better.",
+      "author": "Loyal Client"
+    },
+    {
+      "text": "Walking into Diverse Hair Designs feels like walking into a sanctuary. Peachie listens, understands, and always delivers beyond expectations. Truly a gem in North Carolina.",
+      "author": "Happy Client"
+    }
+  ],
+  "staff": {
+    "name": "Peachie Flower",
+    "role": "Owner & Lead Stylist",
+    "photo": "peachie.webp",
+    "bio": [
+      "Our salon is owned and operated by Peachie.",
+      "Peachie is a hairstylist that specializes in haircutting, coloring — such as balayage, highlights, ombré and color correction. She is certified in American Smoothing Treatment and Japanese Straightening with 14 years of experience in the hair industry. She graduated in 2010 with a degree in cosmetology at Paul Mitchell the School of Fayetteville."
+    ],
+    "quote": "Her passion for hairstyling stems from a deep desire to find joy in creativity while making a meaningful difference in people's lives. Hair is more than just hair — it is a part of our identity, culture, and life experience."
+  },
+  "videos": [
+    { "streamId": "ca2acd08c2114ee8900e6d5c980d632d", "label": "" },
+    { "streamId": "8a0a3f1b9e9a439a8dfc34d04fe10bfb", "label": "" },
+    { "streamId": "a9e8179b6589407798f7adcc14243624", "label": "" },
+    { "streamId": "0493d339ae3044648ff8471794d03f24", "label": "" },
+    { "streamId": "56c0524c1a0c45e8b82d6f5675b5a450", "label": "" },
+    { "streamId": "92a0a8cf13a84055ade23fccd6604596", "label": "" }
+  ],
+  "contact": {
+    "phone": "910-992-0117",
+    "location": "North Carolina",
+    "socials": [
+      { "platform": "Facebook", "url": "https://www.facebook.com/DiversehairDesignsbyPeachie" },
+      { "platform": "Instagram", "url": "https://www.instagram.com/diversehdbypeachie" }
+    ]
+  },
+  "newsletter": {
+    "heading": "Stay <em>Connected</em>",
+    "subtext": "Join our newsletter for exclusive offers, styling tips, and the latest from our salon."
+  },
+  "gallery": {
+    "totalCount": 123
+  }
+}

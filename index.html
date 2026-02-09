@@ -2455,6 +2455,211 @@ body::after {
       goToSlide((current + (dx > 0 ? -1 : 1) + slides.length) % slides.length);
     }
   }, { passive: true });
+
+  // ========== LOAD SITE DATA FROM JSON ==========
+  function loadSiteData() {
+    fetch('site-data.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        try { applyData(data); } catch(e) { console.warn('loadSiteData apply error:', e); }
+      })
+      .catch(function(e) { console.warn('site-data.json not loaded, using hardcoded content:', e); });
+  }
+
+  function applyData(d) {
+    // Hero
+    var heroBadge = document.querySelector('.hero-badge');
+    if (heroBadge && d.hero.badge) heroBadge.textContent = d.hero.badge;
+
+    var heroH1 = document.querySelector('.hero h1');
+    if (heroH1 && d.hero.heading) heroH1.innerHTML = d.hero.heading;
+
+    var heroSub = document.querySelector('.hero-sub');
+    if (heroSub && d.hero.subHeading) heroSub.innerHTML = d.hero.subHeading;
+
+    var heroCta = document.querySelector('.hero-cta');
+    if (heroCta && d.hero.ctaText) heroCta.querySelector('span').textContent = d.hero.ctaText;
+    if (heroCta && d.hero.ctaLink) heroCta.href = d.hero.ctaLink;
+
+    // About
+    var aboutLabel = document.querySelector('.about .section-label');
+    if (aboutLabel && d.about.label) aboutLabel.textContent = d.about.label;
+
+    var aboutTitle = document.querySelector('.about .section-title');
+    if (aboutTitle && d.about.title) aboutTitle.innerHTML = d.about.title;
+
+    var aboutTexts = document.querySelectorAll('.about-text > p:not(.about-quote)');
+    if (d.about.paragraphs) {
+      d.about.paragraphs.forEach(function(p, i) { if (aboutTexts[i]) aboutTexts[i].textContent = p; });
+    }
+
+    var aboutQuote = document.querySelector('.about-quote');
+    if (aboutQuote && d.about.quote) aboutQuote.textContent = '\u201C' + d.about.quote + '\u201D';
+
+    if (d.about.stats) {
+      var statNums = document.querySelectorAll('.about-stat-num');
+      var statLabels = document.querySelectorAll('.about-stat-label');
+      d.about.stats.forEach(function(s, i) {
+        if (statNums[i]) statNums[i].textContent = s.value;
+        if (statLabels[i]) statLabels[i].textContent = s.label;
+      });
+    }
+
+    // Services
+    if (d.services && d.services.length) {
+      var servicesGrid = document.querySelector('.services-grid');
+      servicesGrid.innerHTML = '';
+      d.services.forEach(function(cat, ci) {
+        var card = document.createElement('div');
+        var delayClass = ci === 0 ? '' : ' reveal-delay-' + Math.min(ci, 3);
+        card.className = 'service-card reveal' + delayClass;
+
+        var html = '';
+        if (cat.image) {
+          html += '<img class="service-card-img" src="' + cat.image + '" alt="' + cat.title + '" loading="lazy">';
+        }
+        html += '<h3>' + cat.title + '</h3>';
+
+        cat.items.forEach(function(item) {
+          html += '<div class="service-item"><div>';
+          html += '<span class="service-name">' + item.name + '</span>';
+          if (item.duration) html += '<span class="service-duration">' + item.duration + '</span>';
+          if (item.desc) html += '<span class="service-desc">' + item.desc + '</span>';
+          html += '</div>';
+          html += '<span class="service-price">' + item.price + '</span>';
+          html += '</div>';
+        });
+
+        card.innerHTML = html;
+        servicesGrid.appendChild(card);
+      });
+
+      // Re-observe new service cards for reveal animation
+      servicesGrid.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    }
+
+    // Testimonials
+    if (d.testimonials && d.testimonials.length) {
+      var slider = document.querySelector('.testimonial-slider');
+      var dotsContainer = document.querySelector('.testimonial-dots');
+      slider.innerHTML = '';
+      dotsContainer.innerHTML = '';
+
+      d.testimonials.forEach(function(t, i) {
+        var slide = document.createElement('div');
+        slide.className = 'testimonial-slide' + (i === 0 ? ' active' : '');
+        slide.innerHTML = '<div class="testimonial-quote-mark">\u201C</div>' +
+          '<p class="testimonial-text">' + t.text + '</p>' +
+          '<span class="testimonial-author">' + t.author + '</span>';
+        slider.appendChild(slide);
+
+        var dot = document.createElement('button');
+        dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+        dot.dataset.slide = i;
+        dot.setAttribute('aria-label', 'Testimonial ' + (i + 1));
+        dot.addEventListener('click', function() { goToSlide(parseInt(this.dataset.slide)); });
+        dotsContainer.appendChild(dot);
+      });
+
+      // Update slider references
+      slides = document.querySelectorAll('.testimonial-slide');
+      dots = document.querySelectorAll('.testimonial-dot');
+      current = 0;
+    }
+
+    // Staff
+    var staffName = document.querySelector('.staff-name');
+    if (staffName && d.staff.name) staffName.textContent = d.staff.name;
+
+    var staffRole = document.querySelector('.staff-role');
+    if (staffRole && d.staff.role) staffRole.innerHTML = d.staff.role;
+
+    var staffPhoto = document.querySelector('.staff-photo img');
+    if (staffPhoto && d.staff.photo) staffPhoto.src = d.staff.photo;
+
+    var staffBio = document.querySelector('.staff-bio');
+    if (staffBio && d.staff.bio) {
+      // Remove existing p elements and quote, rebuild
+      var existingPs = staffBio.querySelectorAll('p');
+      existingPs.forEach(function(p) { p.remove(); });
+
+      d.staff.bio.forEach(function(text) {
+        var p = document.createElement('p');
+        p.textContent = text;
+        staffBio.appendChild(p);
+      });
+
+      if (d.staff.quote) {
+        var q = document.createElement('p');
+        q.className = 'staff-bio-quote';
+        q.textContent = d.staff.quote;
+        staffBio.appendChild(q);
+      }
+    }
+
+    // Videos
+    if (d.videos && d.videos.length) {
+      var videosGrid = document.querySelector('.videos-grid');
+      videosGrid.innerHTML = '';
+      d.videos.forEach(function(v, i) {
+        var card = document.createElement('div');
+        var delayClass = i === 0 ? '' : ' reveal-delay-' + Math.min(i, 3);
+        card.className = 'video-card reveal' + delayClass;
+        card.innerHTML = '<iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/' + v.streamId + '/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>' +
+          (v.label ? '<span class="video-card-label">' + v.label + '</span>' : '');
+        videosGrid.appendChild(card);
+      });
+
+      videosGrid.querySelectorAll('.reveal').forEach(function(el) {
+        observer.observe(el);
+      });
+    }
+
+    // Contact
+    var contactPhone = document.querySelector('.contact-detail-value a[href^="tel:"]');
+    if (contactPhone && d.contact.phone) {
+      contactPhone.textContent = d.contact.phone;
+      contactPhone.href = 'tel:' + d.contact.phone.replace(/[^0-9+]/g, '');
+    }
+
+    var contactLocation = document.querySelectorAll('.contact-detail-value');
+    if (contactLocation[1] && d.contact.location) contactLocation[1].textContent = d.contact.location;
+
+    // Newsletter
+    var ctaH2 = document.querySelector('.cta-banner h2');
+    if (ctaH2 && d.newsletter.heading) ctaH2.innerHTML = d.newsletter.heading;
+
+    var ctaP = document.querySelector('.cta-banner p');
+    if (ctaP && d.newsletter.subtext) ctaP.textContent = d.newsletter.subtext;
+
+    // Gallery count
+    if (d.gallery && d.gallery.totalCount) {
+      galleryImages = [];
+      for (var i = 1; i <= d.gallery.totalCount; i++) {
+        galleryImages.push('gallery/' + (i < 10 ? '0' : '') + i + '.jpeg');
+      }
+      // Rebuild initial gallery grid
+      grid.innerHTML = '';
+      galleryLoaded = INITIAL_COUNT;
+      for (var i = 0; i < Math.min(INITIAL_COUNT, galleryImages.length); i++) {
+        var item = createGalleryItem(i, false);
+        var delays = ['', ' reveal-delay-1', ' reveal-delay-2'];
+        item.className = 'portfolio-item reveal' + delays[i % 3];
+        grid.appendChild(item);
+      }
+      grid.querySelectorAll('.reveal').forEach(function(el) { portfolioObserver.observe(el); });
+      if (galleryImages.length <= INITIAL_COUNT) {
+        loadMoreBtn.style.display = 'none';
+      } else {
+        loadMoreBtn.style.display = '';
+      }
+    }
+  }
+
+  // Load data (graceful degradation — if it fails, hardcoded content stays)
+  loadSiteData();
 })();
 </script>
 </body>

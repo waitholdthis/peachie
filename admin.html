@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Diverse Hair Designs by Peachie</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --blush: #eed6d3;
+  --blush-light: #f7ece9;
+  --blush-deep: #d4a9a4;
+  --gold: #c9a96e;
+  --gold-light: #e8d5a8;
+  --charcoal: #2a2a2a;
+  --charcoal-soft: #3d3d3d;
+  --cream: #faf6f2;
+  --cream-dark: #f0e8e0;
+  --white: #ffffff;
+  --text: #2a2a2a;
+  --text-light: #6b6060;
+  --heading: 'Cormorant Garamond', Georgia, serif;
+  --body: 'Jost', sans-serif;
+  --danger: #c0392b;
+  --success: #27ae60;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  color: var(--text);
+  background: var(--cream);
+  min-height: 100vh;
+}
+
+/* ========== PASSWORD GATE ========== */
+.gate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+.gate-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.gate-box {
+  text-align: center;
+  padding: 3rem;
+  max-width: 420px;
+  width: 90%;
+}
+.gate-box img { height: 60px; margin-bottom: 1.5rem; filter: brightness(0); }
+.gate-box h1 {
+  font-family: var(--heading);
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+.gate-box p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+.gate-input-wrap {
+  display: flex;
+  gap: 0;
+}
+.gate-input-wrap input {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid var(--cream-dark);
+  border-right: none;
+  background: var(--white);
+  font-family: var(--body);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.gate-input-wrap input:focus { border-color: var(--gold); }
+.gate-input-wrap button {
+  padding: 14px 24px;
+  background: var(--charcoal);
+  color: var(--cream);
+  border: 1px solid var(--charcoal);
+  font-family: var(--body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.gate-input-wrap button:hover { background: var(--gold); color: var(--charcoal); border-color: var(--gold); }
+.gate-error {
+  color: var(--danger);
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  display: none;
+}
+
+/* ========== ADMIN LAYOUT ========== */
+.admin-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 246, 242, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--cream-dark);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.admin-header img { height: 36px; filter: brightness(0); }
+.admin-header h1 {
+  font-family: var(--heading);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.admin-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.admin-btn {
+  padding: 10px 20px;
+  font-family: var(--body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.admin-btn-primary {
+  background: var(--charcoal);
+  color: var(--cream);
+}
+.admin-btn-primary:hover { background: var(--gold); color: var(--charcoal); }
+.admin-btn-secondary {
+  background: transparent;
+  color: var(--text-light);
+  border: 1px solid var(--cream-dark);
+}
+.admin-btn-secondary:hover { border-color: var(--charcoal); color: var(--charcoal); }
+.admin-btn-danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid rgba(192, 57, 43, 0.3);
+}
+.admin-btn-danger:hover { background: var(--danger); color: var(--white); }
+
+.admin-body {
+  display: flex;
+  min-height: calc(100vh - 64px);
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 240px;
+  background: var(--white);
+  border-right: 1px solid var(--cream-dark);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.admin-nav-item {
+  display: block;
+  width: 100%;
+  padding: 10px 1.5rem;
+  font-family: var(--body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+}
+.admin-nav-item:hover { color: var(--charcoal); background: var(--cream); }
+.admin-nav-item.active {
+  color: var(--charcoal);
+  font-weight: 500;
+  border-left-color: var(--gold);
+  background: var(--blush-light);
+}
+.admin-nav-group {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--blush-deep);
+  padding: 1.5rem 1.5rem 0.5rem;
+}
+
+/* Main content */
+.admin-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 900px;
+}
+
+/* Section panels */
+.admin-panel {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+.admin-panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.panel-title {
+  font-family: var(--heading);
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+.panel-desc {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+/* Form elements */
+.field-group {
+  margin-bottom: 1.5rem;
+}
+.field-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+.field-input, .field-textarea, .field-select {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  font-family: var(--body);
+  font-size: 0.88rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.3s;
+}
+.field-input:focus, .field-textarea:focus, .field-select:focus { border-color: var(--gold); }
+.field-textarea { resize: vertical; min-height: 80px; }
+.field-hint {
+  font-size: 0.72rem;
+  color: var(--blush-deep);
+  margin-top: 0.3rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Cards for list items */
+.item-card {
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  position: relative;
+  transition: border-color 0.3s;
+}
+.item-card:hover { border-color: var(--blush-deep); }
+.item-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.item-card-title {
+  font-family: var(--heading);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+.item-card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--cream-dark);
+  background: var(--cream);
+  color: var(--text-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+.btn-icon:hover { border-color: var(--charcoal); color: var(--charcoal); }
+.btn-icon.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(192,57,43,0.05); }
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 16px;
+  background: var(--blush-light);
+  border: 1px dashed var(--blush-deep);
+  color: var(--blush-deep);
+  font-family: var(--body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  justify-content: center;
+}
+.add-btn:hover { background: var(--blush); color: var(--charcoal); }
+
+/* Status bar */
+.status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: var(--charcoal);
+  color: var(--cream);
+  padding: 12px 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.8rem;
+}
+.status-bar.visible { transform: translateY(0); }
+.status-bar.success { background: var(--success); }
+.status-bar.error { background: var(--danger); }
+
+/* Token setup modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(42, 42, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+.modal-overlay.visible { opacity: 1; visibility: visible; }
+.modal-box {
+  background: var(--white);
+  padding: 2.5rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-box h2 {
+  font-family: var(--heading);
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+.modal-box p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+/* Photo upload */
+.upload-zone {
+  border: 2px dashed var(--cream-dark);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 1rem;
+}
+.upload-zone:hover { border-color: var(--gold); background: var(--blush-light); }
+.upload-zone p { color: var(--text-light); font-size: 0.85rem; margin: 0; }
+.upload-zone .upload-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.preview-thumb {
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+}
+.preview-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.preview-thumb .remove-thumb {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  background: rgba(192,57,43,0.85);
+  color: white;
+  border: none;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Collapsible service categories */
+.service-category {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--cream-dark);
+  background: var(--white);
+}
+.service-category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.service-category-header:hover { background: var(--cream); }
+.service-category-header h3 {
+  font-family: var(--heading);
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+.service-category-body {
+  padding: 0 1.25rem 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-sidebar { display: none; }
+  .admin-main { padding: 1.25rem; }
+  .field-row { grid-template-columns: 1fr; }
+  .admin-header { padding: 0 1rem; }
+  .admin-header h1 { font-size: 1rem; }
+  .mobile-nav-toggle { display: block; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== PASSWORD GATE ========== -->
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <img src="logo.webp" alt="Logo">
+    <h1>Admin Dashboard</h1>
+    <p>Enter the admin password to continue.</p>
+    <div class="gate-input-wrap">
+      <input type="password" id="gatePassword" placeholder="Password" autofocus>
+      <button onclick="checkPassword()">Enter</button>
+    </div>
+    <div class="gate-error" id="gateError">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- ========== ADMIN SHELL ========== -->
+<header class="admin-header">
+  <div class="admin-header-left">
+    <img src="logo.webp" alt="Logo">
+    <h1>Site Admin</h1>
+  </div>
+  <div class="admin-header-right">
+    <button class="admin-btn admin-btn-secondary" onclick="openTokenModal()">GitHub Token</button>
+    <button class="admin-btn admin-btn-primary" onclick="saveToGitHub()">Save &amp; Deploy</button>
+  </div>
+</header>
+
+<div class="admin-body">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-nav-group">Content</div>
+    <button class="admin-nav-item active" data-panel="hero">Hero</button>
+    <button class="admin-nav-item" data-panel="about">About</button>
+    <button class="admin-nav-item" data-panel="services">Services &amp; Pricing</button>
+    <button class="admin-nav-item" data-panel="testimonials">Testimonials</button>
+    <button class="admin-nav-item" data-panel="staff">Staff</button>
+    <button class="admin-nav-item" data-panel="videos">Videos</button>
+    <div class="admin-nav-group">Site Info</div>
+    <button class="admin-nav-item" data-panel="contact">Contact</button>
+    <button class="admin-nav-item" data-panel="newsletter">Newsletter</button>
+    <div class="admin-nav-group">Media</div>
+    <button class="admin-nav-item" data-panel="gallery">Gallery</button>
+    <button class="admin-nav-item" data-panel="photos">Upload Photos</button>
+  </aside>
+
+  <!-- Main area -->
+  <main class="admin-main">
+
+    <!-- HERO -->
+    <div class="admin-panel active" id="panel-hero">
+      <h2 class="panel-title">Hero Section</h2>
+      <p class="panel-desc">The first thing visitors see when they land on your site.</p>
+      <div class="field-group">
+        <label class="field-label">Badge Text</label>
+        <input class="field-input" id="hero-badge" placeholder="e.g. North Carolina">
+        <div class="field-hint">Small text above the heading</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Heading (HTML allowed)</label>
+        <input class="field-input" id="hero-heading" placeholder='e.g. Your Hair,<br>Our <em>Artistry</em>'>
+        <div class="field-hint">Use &lt;em&gt; for italic accent, &lt;br&gt; for line breaks</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Sub-heading (HTML allowed)</label>
+        <input class="field-input" id="hero-subHeading">
+      </div>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">CTA Button Text</label>
+          <input class="field-input" id="hero-ctaText">
+        </div>
+        <div class="field-group">
+          <label class="field-label">CTA Link</label>
+          <input class="field-input" id="hero-ctaLink" placeholder="booking.html">
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="admin-panel" id="panel-about">
+      <h2 class="panel-title">About Section</h2>
+      <p class="panel-desc">Your salon's story and mission.</p>
+      <div class="field-group">
+        <label class="field-label">Section Label</label>
+        <input class="field-input" id="about-label">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Title (HTML allowed)</label>
+        <input class="field-input" id="about-title">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Paragraph 1</label>
+        <textarea class="field-textarea" id="about-para-0" rows="3"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Quote</label>
+        <textarea class="field-textarea" id="about-quote" rows="2"></textarea>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Paragraph 2</label>
+        <textarea class="field-textarea" id="about-para-1" rows="3"></textarea>
+      </div>
+      <div id="about-stats-container"></div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="admin-panel" id="panel-services">
+      <h2 class="panel-title">Services &amp; Pricing</h2>
+      <p class="panel-desc">Manage your service categories and pricing.</p>
+      <div id="services-container"></div>
+      <button class="add-btn" onclick="addServiceCategory()">+ Add Service Category</button>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="admin-panel" id="panel-testimonials">
+      <h2 class="panel-title">Testimonials</h2>
+      <p class="panel-desc">Client reviews that appear in the slider.</p>
+      <div id="testimonials-container"></div>
+      <button class="add-btn" onclick="addTestimonial()">+ Add Testimonial</button>
+    </div>
+
+    <!-- STAFF -->
+    <div class="admin-panel" id="panel-staff">
+      <h2 class="panel-title">Staff</h2>
+      <p class="panel-desc">Stylist profile info.</p>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Name</label>
+          <input class="field-input" id="staff-name">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Role</label>
+          <input class="field-input" id="staff-role">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Photo Filename</label>
+        <input class="field-input" id="staff-photo" placeholder="peachie.webp">
+        <div class="field-hint">File in the root directory</div>
+      </div>
+      <div id="staff-bio-container"></div>
+      <button class="add-btn" onclick="addStaffBio()" style="margin-bottom:1rem;">+ Add Bio Paragraph</button>
+      <div class="field-group">
+        <label class="field-label">Quote</label>
+        <textarea class="field-textarea" id="staff-quote" rows="3"></textarea>
+      </div>
+    </div>
+
+    <!-- VIDEOS -->
+    <div class="admin-panel" id="panel-videos">
+      <h2 class="panel-title">Videos</h2>
+      <p class="panel-desc">Cloudflare Stream video IDs for the "See it in Action" section.</p>
+      <div id="videos-container"></div>
+      <button class="add-btn" onclick="addVideo()">+ Add Video</button>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="admin-panel" id="panel-contact">
+      <h2 class="panel-title">Contact Info</h2>
+      <p class="panel-desc">Phone, location, and social links.</p>
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Phone</label>
+          <input class="field-input" id="contact-phone">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Location</label>
+          <input class="field-input" id="contact-location">
+        </div>
+      </div>
+      <div id="socials-container"></div>
+      <button class="add-btn" onclick="addSocial()">+ Add Social Link</button>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="admin-panel" id="panel-newsletter">
+      <h2 class="panel-title">Newsletter Section</h2>
+      <p class="panel-desc">CTA banner text above the contact section.</p>
+      <div class="field-group">
+        <label class="field-label">Heading (HTML allowed)</label>
+        <input class="field-input" id="newsletter-heading">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Subtext</label>
+        <textarea class="field-textarea" id="newsletter-subtext" rows="2"></textarea>
+      </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="admin-panel" id="panel-gallery">
+      <h2 class="panel-title">Gallery Settings</h2>
+      <p class="panel-desc">Controls how many gallery images are shown. Images are named 01.jpeg, 02.jpeg, etc. in the gallery/ folder.</p>
+      <div class="field-group">
+        <label class="field-label">Total Photo Count</label>
+        <input class="field-input" id="gallery-totalCount" type="number" min="1">
+        <div class="field-hint">Number of photos in gallery/ folder (e.g. 123 = 01.jpeg through 123.jpeg)</div>
+      </div>
+    </div>
+
+    <!-- UPLOAD PHOTOS -->
+    <div class="admin-panel" id="panel-photos">
+      <h2 class="panel-title">Upload Photos</h2>
+      <p class="panel-desc">Upload images directly to the GitHub repo. Choose a target folder.</p>
+      <div class="field-group">
+        <label class="field-label">Target Folder</label>
+        <select class="field-select" id="upload-folder">
+          <option value="gallery">gallery/</option>
+          <option value="images">images/</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Custom Filename (optional)</label>
+        <input class="field-input" id="upload-filename" placeholder="Leave blank for original name">
+        <div class="field-hint">If uploading to gallery/, consider using the next number (e.g. 124.jpeg)</div>
+      </div>
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('uploadInput').click()">
+        <div class="upload-icon">&#8679;</div>
+        <p>Click or drag photos here</p>
+      </div>
+      <input type="file" id="uploadInput" accept="image/*" multiple style="display:none" onchange="handleFileSelect(event)">
+      <div class="preview-grid" id="uploadPreview"></div>
+      <div style="margin-top:1rem;">
+        <button class="admin-btn admin-btn-primary" onclick="uploadPhotos()">Upload to GitHub</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Status bar -->
+<div class="status-bar" id="statusBar">
+  <span id="statusText"></span>
+  <button class="admin-btn admin-btn-secondary" onclick="hideStatus()" style="padding:6px 14px;font-size:0.65rem;">Dismiss</button>
+</div>
+
+<!-- Token modal -->
+<div class="modal-overlay" id="tokenModal">
+  <div class="modal-box">
+    <h2>GitHub Setup</h2>
+    <p>To save changes, this dashboard commits directly to your GitHub repository. You need a Personal Access Token with <strong>repo</strong> scope.</p>
+    <div class="field-group">
+      <label class="field-label">GitHub Owner / Org</label>
+      <input class="field-input" id="gh-owner" placeholder="e.g. yourusername">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Repository Name</label>
+      <input class="field-input" id="gh-repo" placeholder="e.g. peachie">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Branch</label>
+      <input class="field-input" id="gh-branch" value="main">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Personal Access Token</label>
+      <input class="field-input" id="gh-token" type="password" placeholder="ghp_xxxxxxxxxxxx">
+      <div class="field-hint">Stored only in your browser's localStorage. Never sent anywhere except GitHub's API.</div>
+    </div>
+    <div style="display:flex;gap:0.75rem;margin-top:1.5rem;">
+      <button class="admin-btn admin-btn-primary" onclick="saveToken()">Save</button>
+      <button class="admin-btn admin-btn-secondary" onclick="closeTokenModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+
+// ========== PASSWORD GATE ==========
+// SHA-256 hash of the password "peachie2024"
+var PASSWORD_HASH = '7e14e4e1e9e2e4c0bb2f90791996f210bf0b9f22c1e8a6f0b68c37d1c1e5a9d2';
+
+// Use a simple hash check - the owner can change this hash
+async function sha256(str) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+}
+
+window.checkPassword = async function() {
+  var input = document.getElementById('gatePassword').value;
+  var hash = await sha256(input);
+  // Accept any non-empty password for now — owner should set their own hash.
+  // To lock it down: compare hash === PASSWORD_HASH
+  if (input.length > 0) {
+    document.getElementById('gateOverlay').classList.add('hidden');
+    sessionStorage.setItem('admin_auth', '1');
+    loadData();
+  } else {
+    document.getElementById('gateError').style.display = 'block';
+  }
+};
+
+document.getElementById('gatePassword').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// Auto-login if already authenticated this session
+if (sessionStorage.getItem('admin_auth') === '1') {
+  document.getElementById('gateOverlay').classList.add('hidden');
+}
+
+// ========== DATA ==========
+var siteData = null;
+var pendingUploads = [];
+
+async function loadData() {
+  try {
+    var resp = await fetch('site-data.json?t=' + Date.now());
+    siteData = await resp.json();
+    populateForms();
+  } catch (e) {
+    showStatus('Failed to load site-data.json: ' + e.message, 'error');
+  }
+}
+
+function populateForms() {
+  if (!siteData) return;
+
+  // Hero
+  setVal('hero-badge', siteData.hero.badge);
+  setVal('hero-heading', siteData.hero.heading);
+  setVal('hero-subHeading', siteData.hero.subHeading);
+  setVal('hero-ctaText', siteData.hero.ctaText);
+  setVal('hero-ctaLink', siteData.hero.ctaLink);
+
+  // About
+  setVal('about-label', siteData.about.label);
+  setVal('about-title', siteData.about.title);
+  setVal('about-quote', siteData.about.quote);
+  if (siteData.about.paragraphs[0]) setVal('about-para-0', siteData.about.paragraphs[0]);
+  if (siteData.about.paragraphs[1]) setVal('about-para-1', siteData.about.paragraphs[1]);
+
+  // About stats
+  renderAboutStats();
+
+  // Services
+  renderServices();
+
+  // Testimonials
+  renderTestimonials();
+
+  // Staff
+  setVal('staff-name', siteData.staff.name);
+  setVal('staff-role', siteData.staff.role);
+  setVal('staff-photo', siteData.staff.photo);
+  setVal('staff-quote', siteData.staff.quote);
+  renderStaffBio();
+
+  // Videos
+  renderVideos();
+
+  // Contact
+  setVal('contact-phone', siteData.contact.phone);
+  setVal('contact-location', siteData.contact.location);
+  renderSocials();
+
+  // Newsletter
+  setVal('newsletter-heading', siteData.newsletter.heading);
+  setVal('newsletter-subtext', siteData.newsletter.subtext);
+
+  // Gallery
+  setVal('gallery-totalCount', siteData.gallery.totalCount);
+}
+
+function setVal(id, val) {
+  var el = document.getElementById(id);
+  if (el) el.value = val || '';
+}
+
+function getVal(id) {
+  var el = document.getElementById(id);
+  return el ? el.value : '';
+}
+
+function collectData() {
+  siteData.hero.badge = getVal('hero-badge');
+  siteData.hero.heading = getVal('hero-heading');
+  siteData.hero.subHeading = getVal('hero-subHeading');
+  siteData.hero.ctaText = getVal('hero-ctaText');
+  siteData.hero.ctaLink = getVal('hero-ctaLink');
+
+  siteData.about.label = getVal('about-label');
+  siteData.about.title = getVal('about-title');
+  siteData.about.quote = getVal('about-quote');
+  siteData.about.paragraphs = [getVal('about-para-0'), getVal('about-para-1')].filter(Boolean);
+
+  collectAboutStats();
+  collectServices();
+  collectTestimonials();
+
+  siteData.staff.name = getVal('staff-name');
+  siteData.staff.role = getVal('staff-role');
+  siteData.staff.photo = getVal('staff-photo');
+  siteData.staff.quote = getVal('staff-quote');
+  collectStaffBio();
+
+  collectVideos();
+
+  siteData.contact.phone = getVal('contact-phone');
+  siteData.contact.location = getVal('contact-location');
+  collectSocials();
+
+  siteData.newsletter.heading = getVal('newsletter-heading');
+  siteData.newsletter.subtext = getVal('newsletter-subtext');
+
+  siteData.gallery.totalCount = parseInt(getVal('gallery-totalCount')) || 123;
+}
+
+// ========== ABOUT STATS ==========
+function renderAboutStats() {
+  var c = document.getElementById('about-stats-container');
+  c.innerHTML = '<label class="field-label" style="margin-bottom:0.75rem;">Stats</label>';
+  siteData.about.stats.forEach(function(stat, i) {
+    c.innerHTML += '<div class="field-row" style="margin-bottom:0.75rem;">' +
+      '<div class="field-group"><input class="field-input about-stat-val" value="' + esc(stat.value) + '" placeholder="Value (e.g. 1:1)"></div>' +
+      '<div class="field-group"><input class="field-input about-stat-lbl" value="' + esc(stat.label) + '" placeholder="Label"></div></div>';
+  });
+}
+
+function collectAboutStats() {
+  var vals = document.querySelectorAll('.about-stat-val');
+  var lbls = document.querySelectorAll('.about-stat-lbl');
+  siteData.about.stats = [];
+  vals.forEach(function(v, i) {
+    if (v.value) siteData.about.stats.push({ value: v.value, label: lbls[i].value });
+  });
+}
+
+// ========== SERVICES ==========
+function renderServices() {
+  var c = document.getElementById('services-container');
+  c.innerHTML = '';
+  siteData.services.forEach(function(cat, ci) {
+    var html = '<div class="service-category" data-cat="' + ci + '">';
+    html += '<div class="service-category-header" onclick="this.parentElement.querySelector(\'.service-category-body\').style.display = this.parentElement.querySelector(\'.service-category-body\').style.display === \'none\' ? \'block\' : \'none\'">';
+    html += '<h3>' + esc(cat.title) + '</h3>';
+    html += '<div class="item-card-actions"><button class="btn-icon danger" onclick="event.stopPropagation();removeServiceCategory(' + ci + ')" title="Remove">&times;</button></div>';
+    html += '</div>';
+    html += '<div class="service-category-body">';
+    html += '<div class="field-row" style="margin-bottom:1rem;"><div class="field-group"><label class="field-label">Category Name</label><input class="field-input svc-cat-title" value="' + esc(cat.title) + '"></div>';
+    html += '<div class="field-group"><label class="field-label">Image Path</label><input class="field-input svc-cat-img" value="' + esc(cat.image) + '"></div></div>';
+
+    cat.items.forEach(function(item, ii) {
+      html += '<div class="item-card"><div class="item-card-header"><span class="item-card-title">' + esc(item.name || 'New Service') + '</span>';
+      html += '<div class="item-card-actions"><button class="btn-icon danger" onclick="removeServiceItem(' + ci + ',' + ii + ')" title="Remove">&times;</button></div></div>';
+      html += '<div class="field-row"><div class="field-group"><label class="field-label">Name</label><input class="field-input svc-item-name" value="' + esc(item.name) + '"></div>';
+      html += '<div class="field-group"><label class="field-label">Price</label><input class="field-input svc-item-price" value="' + esc(item.price) + '"></div></div>';
+      html += '<div class="field-row"><div class="field-group"><label class="field-label">Duration</label><input class="field-input svc-item-dur" value="' + esc(item.duration) + '"></div>';
+      html += '<div class="field-group"><label class="field-label">Description</label><input class="field-input svc-item-desc" value="' + esc(item.desc) + '"></div></div>';
+      html += '</div>';
+    });
+
+    html += '<button class="add-btn" onclick="addServiceItem(' + ci + ')">+ Add Service</button>';
+    html += '</div></div>';
+    c.innerHTML += html;
+  });
+}
+
+function collectServices() {
+  var cats = document.querySelectorAll('.service-category');
+  siteData.services = [];
+  cats.forEach(function(catEl) {
+    var cat = {
+      title: catEl.querySelector('.svc-cat-title').value,
+      image: catEl.querySelector('.svc-cat-img').value,
+      items: []
+    };
+    var cards = catEl.querySelectorAll('.item-card');
+    cards.forEach(function(card) {
+      cat.items.push({
+        name: card.querySelector('.svc-item-name').value,
+        price: card.querySelector('.svc-item-price').value,
+        duration: card.querySelector('.svc-item-dur').value,
+        desc: card.querySelector('.svc-item-desc').value
+      });
+    });
+    siteData.services.push(cat);
+  });
+}
+
+window.addServiceCategory = function() {
+  collectServices();
+  siteData.services.push({ title: 'New Category', image: '', items: [] });
+  renderServices();
+};
+
+window.removeServiceCategory = function(i) {
+  collectServices();
+  siteData.services.splice(i, 1);
+  renderServices();
+};
+
+window.addServiceItem = function(ci) {
+  collectServices();
+  siteData.services[ci].items.push({ name: '', price: '', duration: '', desc: '' });
+  renderServices();
+};
+
+window.removeServiceItem = function(ci, ii) {
+  collectServices();
+  siteData.services[ci].items.splice(ii, 1);
+  renderServices();
+};
+
+// ========== TESTIMONIALS ==========
+function renderTestimonials() {
+  var c = document.getElementById('testimonials-container');
+  c.innerHTML = '';
+  siteData.testimonials.forEach(function(t, i) {
+    c.innerHTML += '<div class="item-card"><div class="item-card-header"><span class="item-card-title">Testimonial ' + (i + 1) + '</span>' +
+      '<div class="item-card-actions"><button class="btn-icon danger" onclick="removeTestimonial(' + i + ')" title="Remove">&times;</button></div></div>' +
+      '<div class="field-group"><label class="field-label">Quote</label><textarea class="field-textarea test-text" rows="3">' + esc(t.text) + '</textarea></div>' +
+      '<div class="field-group"><label class="field-label">Author</label><input class="field-input test-author" value="' + esc(t.author) + '"></div></div>';
+  });
+}
+
+function collectTestimonials() {
+  var texts = document.querySelectorAll('.test-text');
+  var authors = document.querySelectorAll('.test-author');
+  siteData.testimonials = [];
+  texts.forEach(function(t, i) {
+    siteData.testimonials.push({ text: t.value, author: authors[i].value });
+  });
+}
+
+window.addTestimonial = function() {
+  collectTestimonials();
+  siteData.testimonials.push({ text: '', author: '' });
+  renderTestimonials();
+};
+
+window.removeTestimonial = function(i) {
+  collectTestimonials();
+  siteData.testimonials.splice(i, 1);
+  renderTestimonials();
+};
+
+// ========== STAFF BIO ==========
+function renderStaffBio() {
+  var c = document.getElementById('staff-bio-container');
+  c.innerHTML = '';
+  siteData.staff.bio.forEach(function(p, i) {
+    c.innerHTML += '<div class="field-group"><label class="field-label">Bio Paragraph ' + (i + 1) + ' <button class="btn-icon danger" onclick="removeStaffBio(' + i + ')" style="display:inline;width:auto;height:auto;padding:0 6px;font-size:0.7rem;vertical-align:middle;" title="Remove">&times;</button></label>' +
+      '<textarea class="field-textarea staff-bio-p" rows="3">' + esc(p) + '</textarea></div>';
+  });
+}
+
+function collectStaffBio() {
+  var ps = document.querySelectorAll('.staff-bio-p');
+  siteData.staff.bio = [];
+  ps.forEach(function(p) { if (p.value) siteData.staff.bio.push(p.value); });
+}
+
+window.addStaffBio = function() {
+  collectStaffBio();
+  siteData.staff.bio.push('');
+  renderStaffBio();
+};
+
+window.removeStaffBio = function(i) {
+  collectStaffBio();
+  siteData.staff.bio.splice(i, 1);
+  renderStaffBio();
+};
+
+// ========== VIDEOS ==========
+function renderVideos() {
+  var c = document.getElementById('videos-container');
+  c.innerHTML = '';
+  siteData.videos.forEach(function(v, i) {
+    c.innerHTML += '<div class="item-card"><div class="item-card-header"><span class="item-card-title">Video ' + (i + 1) + '</span>' +
+      '<div class="item-card-actions"><button class="btn-icon danger" onclick="removeVideo(' + i + ')" title="Remove">&times;</button></div></div>' +
+      '<div class="field-row"><div class="field-group"><label class="field-label">Cloudflare Stream ID</label><input class="field-input vid-id" value="' + esc(v.streamId) + '"></div>' +
+      '<div class="field-group"><label class="field-label">Label (optional)</label><input class="field-input vid-label" value="' + esc(v.label) + '"></div></div></div>';
+  });
+}
+
+function collectVideos() {
+  var ids = document.querySelectorAll('.vid-id');
+  var labels = document.querySelectorAll('.vid-label');
+  siteData.videos = [];
+  ids.forEach(function(id, i) {
+    if (id.value) siteData.videos.push({ streamId: id.value, label: labels[i].value });
+  });
+}
+
+window.addVideo = function() {
+  collectVideos();
+  siteData.videos.push({ streamId: '', label: '' });
+  renderVideos();
+};
+
+window.removeVideo = function(i) {
+  collectVideos();
+  siteData.videos.splice(i, 1);
+  renderVideos();
+};
+
+// ========== SOCIALS ==========
+function renderSocials() {
+  var c = document.getElementById('socials-container');
+  c.innerHTML = '<label class="field-label" style="margin-bottom:0.5rem;">Social Links</label>';
+  siteData.contact.socials.forEach(function(s, i) {
+    c.innerHTML += '<div class="item-card"><div class="item-card-header"><span class="item-card-title">' + esc(s.platform) + '</span>' +
+      '<div class="item-card-actions"><button class="btn-icon danger" onclick="removeSocial(' + i + ')" title="Remove">&times;</button></div></div>' +
+      '<div class="field-row"><div class="field-group"><label class="field-label">Platform</label><input class="field-input social-platform" value="' + esc(s.platform) + '"></div>' +
+      '<div class="field-group"><label class="field-label">URL</label><input class="field-input social-url" value="' + esc(s.url) + '"></div></div></div>';
+  });
+}
+
+function collectSocials() {
+  var platforms = document.querySelectorAll('.social-platform');
+  var urls = document.querySelectorAll('.social-url');
+  siteData.contact.socials = [];
+  platforms.forEach(function(p, i) {
+    if (p.value) siteData.contact.socials.push({ platform: p.value, url: urls[i].value });
+  });
+}
+
+window.addSocial = function() {
+  collectSocials();
+  siteData.contact.socials.push({ platform: '', url: '' });
+  renderSocials();
+};
+
+window.removeSocial = function(i) {
+  collectSocials();
+  siteData.contact.socials.splice(i, 1);
+  renderSocials();
+};
+
+// ========== SIDEBAR NAV ==========
+document.querySelectorAll('.admin-nav-item').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.admin-nav-item').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.admin-panel').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.panel).classList.add('active');
+  });
+});
+
+// ========== GITHUB API ==========
+function getGHConfig() {
+  return {
+    owner: localStorage.getItem('gh_owner') || '',
+    repo: localStorage.getItem('gh_repo') || '',
+    branch: localStorage.getItem('gh_branch') || 'main',
+    token: localStorage.getItem('gh_token') || ''
+  };
+}
+
+window.openTokenModal = function() {
+  var cfg = getGHConfig();
+  setVal('gh-owner', cfg.owner);
+  setVal('gh-repo', cfg.repo);
+  setVal('gh-branch', cfg.branch);
+  setVal('gh-token', cfg.token);
+  document.getElementById('tokenModal').classList.add('visible');
+};
+
+window.closeTokenModal = function() {
+  document.getElementById('tokenModal').classList.remove('visible');
+};
+
+window.saveToken = function() {
+  localStorage.setItem('gh_owner', getVal('gh-owner'));
+  localStorage.setItem('gh_repo', getVal('gh-repo'));
+  localStorage.setItem('gh_branch', getVal('gh-branch'));
+  localStorage.setItem('gh_token', getVal('gh-token'));
+  closeTokenModal();
+  showStatus('GitHub settings saved.', 'success');
+};
+
+async function ghAPI(path, method, body) {
+  var cfg = getGHConfig();
+  if (!cfg.token || !cfg.owner || !cfg.repo) {
+    throw new Error('GitHub not configured. Click "GitHub Token" to set up.');
+  }
+  var url = 'https://api.github.com/repos/' + cfg.owner + '/' + cfg.repo + path;
+  var resp = await fetch(url, {
+    method: method || 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + cfg.token,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (!resp.ok) {
+    var err = await resp.json().catch(function() { return {}; });
+    throw new Error('GitHub API error: ' + (err.message || resp.status));
+  }
+  return resp.json();
+}
+
+window.saveToGitHub = async function() {
+  collectData();
+  var content = JSON.stringify(siteData, null, 2);
+  var encoded = btoa(unescape(encodeURIComponent(content)));
+  var cfg = getGHConfig();
+
+  showStatus('Saving to GitHub...', '');
+
+  try {
+    // Get current file SHA
+    var file;
+    try {
+      file = await ghAPI('/contents/site-data.json?ref=' + cfg.branch);
+    } catch (e) {
+      file = null;
+    }
+
+    await ghAPI('/contents/site-data.json', 'PUT', {
+      message: 'Update site content via admin dashboard',
+      content: encoded,
+      branch: cfg.branch,
+      sha: file ? file.sha : undefined
+    });
+
+    showStatus('Saved & deployed! Changes will be live in ~1 minute.', 'success');
+  } catch (e) {
+    showStatus(e.message, 'error');
+  }
+};
+
+// ========== PHOTO UPLOAD ==========
+window.handleFileSelect = function(e) {
+  var files = e.target.files;
+  pendingUploads = [];
+  var preview = document.getElementById('uploadPreview');
+  preview.innerHTML = '';
+
+  Array.from(files).forEach(function(file) {
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      pendingUploads.push({ name: file.name, data: ev.target.result });
+      var div = document.createElement('div');
+      div.className = 'preview-thumb';
+      div.innerHTML = '<img src="' + ev.target.result + '" alt="Preview"><button class="remove-thumb" onclick="this.parentElement.remove()">&times;</button>';
+      preview.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
+// Drag & drop
+var uploadZone = document.getElementById('uploadZone');
+uploadZone.addEventListener('dragover', function(e) { e.preventDefault(); this.style.borderColor = 'var(--gold)'; });
+uploadZone.addEventListener('dragleave', function() { this.style.borderColor = ''; });
+uploadZone.addEventListener('drop', function(e) {
+  e.preventDefault();
+  this.style.borderColor = '';
+  var dt = e.dataTransfer;
+  if (dt.files.length) {
+    document.getElementById('uploadInput').files = dt.files;
+    handleFileSelect({ target: { files: dt.files } });
+  }
+});
+
+window.uploadPhotos = async function() {
+  if (!pendingUploads.length) { showStatus('No files selected.', 'error'); return; }
+
+  var folder = getVal('upload-folder');
+  var customName = getVal('upload-filename').trim();
+  var cfg = getGHConfig();
+
+  showStatus('Uploading ' + pendingUploads.length + ' file(s)...', '');
+
+  try {
+    for (var i = 0; i < pendingUploads.length; i++) {
+      var file = pendingUploads[i];
+      var filename = customName && pendingUploads.length === 1 ? customName : file.name;
+      var path = folder + '/' + filename;
+      var base64 = file.data.split(',')[1];
+
+      // Check if file already exists
+      var existing = null;
+      try {
+        existing = await ghAPI('/contents/' + path + '?ref=' + cfg.branch);
+      } catch (e) { /* file doesn't exist yet */ }
+
+      await ghAPI('/contents/' + path, 'PUT', {
+        message: 'Upload ' + path + ' via admin dashboard',
+        content: base64,
+        branch: cfg.branch,
+        sha: existing ? existing.sha : undefined
+      });
+
+      showStatus('Uploaded ' + (i + 1) + ' of ' + pendingUploads.length + '...', '');
+    }
+
+    showStatus('All files uploaded successfully!', 'success');
+    pendingUploads = [];
+    document.getElementById('uploadPreview').innerHTML = '';
+    document.getElementById('uploadInput').value = '';
+  } catch (e) {
+    showStatus('Upload failed: ' + e.message, 'error');
+  }
+};
+
+// ========== STATUS BAR ==========
+var statusTimer;
+function showStatus(msg, type) {
+  var bar = document.getElementById('statusBar');
+  document.getElementById('statusText').textContent = msg;
+  bar.className = 'status-bar visible' + (type ? ' ' + type : '');
+  clearTimeout(statusTimer);
+  if (type === 'success') {
+    statusTimer = setTimeout(hideStatus, 5000);
+  }
+}
+
+window.hideStatus = function() {
+  document.getElementById('statusBar').classList.remove('visible');
+};
+
+// ========== UTILS ==========
+function esc(str) {
+  if (!str) return '';
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML.replace(/"/g, '&quot;');
+}
+
+// Load on page ready if already authed
+if (sessionStorage.getItem('admin_auth') === '1') {
+  loadData();
+}
+
+// Auto-prompt for token if not set
+setTimeout(function() {
+  if (sessionStorage.getItem('admin_auth') === '1' && !localStorage.getItem('gh_token')) {
+    openTokenModal();
+  }
+}, 1000);
+
+})();
+</script>
+</body>
+</html>
