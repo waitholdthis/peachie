@@ -1722,6 +1722,100 @@ body::after {
   .showcase-strip-item:nth-child(n+4) { display: none; }
 }
 
+/* ========== VIDEOS / SEE IT IN ACTION ========== */
+.videos {
+  background: var(--charcoal);
+  position: relative;
+  overflow: hidden;
+}
+
+.videos::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+}
+
+.videos .section-label { color: var(--gold-light); }
+.videos .section-title { color: var(--cream); }
+.videos .section-title em { color: var(--blush); }
+
+.videos-header {
+  max-width: 600px;
+  margin-bottom: 3rem;
+}
+
+.videos-header p {
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(250, 246, 242, 0.6);
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.video-card {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 9/16;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: border-color 0.4s;
+}
+
+.video-card:hover {
+  border-color: rgba(201, 169, 110, 0.3);
+}
+
+.video-card iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.video-card-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 0.75rem 0.6rem;
+  background: linear-gradient(to top, rgba(42, 42, 42, 0.7), transparent);
+  font-family: var(--body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 246, 242, 0.8);
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .videos-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .videos-grid { grid-template-columns: repeat(2, 1fr); }
+  .video-card:nth-child(n+5) { display: none; }
+}
+
+@media (max-width: 600px) {
+  .videos-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .video-card:nth-child(n+5) { display: none; }
+  .video-card-label { font-size: 0.5rem; padding: 1.5rem 0.5rem 0.4rem; }
+}
+
 /* Touch device hover fix */
 @media (hover: none) {
   .portfolio-item::before { display: none; }
@@ -1770,7 +1864,7 @@ body::after {
 <!-- Hero -->
 <section class="hero" id="home">
   <div class="hero-content">
-    <div class="hero-badge reveal">Fayetteville, North Carolina</div>
+    <div class="hero-badge reveal">North Carolina</div>
     <div class="hero-heading-row reveal reveal-delay-1">
       <img src="logo.webp" alt="Diverse Hair Designs by Peachie" class="hero-logo">
       <h1>Your Hair,<br>Our <em>Artistry</em></h1>
@@ -2031,6 +2125,35 @@ body::after {
       <p>Our salon is owned and operated by Peachie.</p>
       <p>Peachie is a hairstylist that specializes in haircutting, coloring — such as balayage, highlights, ombr&eacute; and color correction. She is certified in American Smoothing Treatment and Japanese Straightening with 14 years of experience in the hair industry. She graduated in 2010 with a degree in cosmetology at Paul Mitchell the School of Fayetteville.</p>
       <p class="staff-bio-quote">Her passion for hairstyling stems from a deep desire to find joy in creativity while making a meaningful difference in people's lives. Hair is more than just hair — it is a part of our identity, culture, and life experience.</p>
+    </div>
+  </div>
+</section>
+
+<!-- See it in Action -->
+<section class="videos section" id="videos">
+  <div class="videos-header">
+    <div class="section-label reveal">Behind the Chair</div>
+    <h2 class="section-title reveal reveal-delay-1">See it in <em>Action</em></h2>
+    <p class="reveal reveal-delay-2">Get a first peek at the behind-the-scenes making our day productive.</p>
+  </div>
+  <div class="videos-grid">
+    <div class="video-card reveal">
+      <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/ca2acd08c2114ee8900e6d5c980d632d/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-card reveal reveal-delay-1">
+      <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/8a0a3f1b9e9a439a8dfc34d04fe10bfb/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-card reveal reveal-delay-2">
+      <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/a9e8179b6589407798f7adcc14243624/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-card reveal reveal-delay-3">
+      <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/0493d339ae3044648ff8471794d03f24/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-card reveal">
+      <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/56c0524c1a0c45e8b82d6f5675b5a450/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-card reveal reveal-delay-1">
+      <iframe src="https://customer-ugajlzvkncemhxjh.cloudflarestream.com/92a0a8cf13a84055ade23fccd6604596/iframe?muted=true&loop=true&autoplay=true&controls=false" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
 </section>
