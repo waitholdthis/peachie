@@ -1,6 +1,6 @@
 {
   "hero": {
-    "badge": "North Carolina",
+    "badge": "Fayetteville, North Carolina",
     "heading": "Your Hair,<br>Our <em>Artistry</em>",
     "subHeading": "One client at a time. Because you deserve undivided attention&nbsp;&amp;&nbsp;care.",
     "ctaText": "Book Your Experience",
@@ -15,8 +15,14 @@
     ],
     "quote": "We find it very important that our clients feel empowered, and embrace the importance of self care.",
     "stats": [
-      { "value": "1:1", "label": "Client Attention" },
-      { "value": "100%", "label": "Dedicated Focus" }
+      {
+        "value": "1:1",
+        "label": "Client Attention"
+      },
+      {
+        "value": "100%",
+        "label": "Dedicated Focus"
+      }
     ]
   },
   "services": [
@@ -26,33 +32,33 @@
       "items": [
         {
           "name": "Full Balayage",
+          "price": "$300+",
           "duration": "3 hr 30 min",
-          "desc": "Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut & style.",
-          "price": "$300+"
+          "desc": "Fully customized to your hair needs. Low maintenance vs traditional highlights. Includes root melting, toner glaze, hydration treatment, haircut & style."
         },
         {
           "name": "Partial Highlights",
+          "price": "$190+",
           "duration": "2 hr 30 min",
-          "desc": "Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner & style.",
-          "price": "$190+"
+          "desc": "Add dimension and brightness with vibrant highlights that frame your face. Includes root melting, toner & style."
         },
         {
           "name": "Single Process Color",
+          "price": "$125+",
           "duration": "1 hr 30 min",
-          "desc": "All-over color where the entire head of hair is dyed in a single shade.",
-          "price": "$125+"
+          "desc": "All-over color where the entire head of hair is dyed in a single shade."
         },
         {
           "name": "Root Touch-Up / Gray Coverage",
+          "price": "$110+",
           "duration": "1 hr 30 min",
-          "desc": "For pre-existing color or gray coverage. Single color process, max 8 weeks maintenance regrowth (at least 2 inches).",
-          "price": "$110+"
+          "desc": "For pre-existing color or gray coverage. Single color process, max 8 weeks maintenance regrowth (at least 2 inches)."
         },
         {
           "name": "Color Correction",
+          "price": "Varies",
           "duration": "4–5 hours",
-          "desc": "Designed to fix unwanted hair color from box dye, fading, or a desire for a new transformation.",
-          "price": "Varies"
+          "desc": "Designed to fix unwanted hair color from box dye, fading, or a desire for a new transformation."
         }
       ]
     },
@@ -62,21 +68,21 @@
       "items": [
         {
           "name": "Cut, Wash & Style",
+          "price": "$55+",
           "duration": "45 min",
-          "desc": "",
-          "price": "$55+"
+          "desc": ""
         },
         {
           "name": "Men's Cut",
+          "price": "$25",
           "duration": "",
-          "desc": "",
-          "price": "$25"
+          "desc": ""
         },
         {
           "name": "Girls Wash, Cut & Blow Dry",
+          "price": "Call",
           "duration": "Under 12 yrs · 45 min",
-          "desc": "",
-          "price": "Call"
+          "desc": ""
         }
       ]
     },
@@ -86,9 +92,9 @@
       "items": [
         {
           "name": "Updos & Special Occasion",
+          "price": "Call",
           "duration": "By consultation",
-          "desc": "From classic updos to flowing curls — styled for your special occasion.",
-          "price": "Call"
+          "desc": "From classic updos to flowing curls — styled for your special occasion."
         }
       ]
     },
@@ -98,15 +104,15 @@
       "items": [
         {
           "name": "Scalp Treatment",
+          "price": "$65+",
           "duration": "1 hour",
-          "desc": "Total scalp detox — exfoliate dead skin, remove buildup. Includes scalp scan analysis, deep cleansing, hair mask, massage & blow dry.",
-          "price": "$65+"
+          "desc": "Total scalp detox — exfoliate dead skin, remove buildup. Includes scalp scan analysis, deep cleansing, hair mask, massage & blow dry."
         },
         {
           "name": "Smoothing Treatment",
+          "price": "$220–$300",
           "duration": "3 hours · Consultation required",
-          "desc": "Infuses amino acids, proteins, silk & pearl. Results last 4–5 months. Short $220 · Medium $250 · Long $300.",
-          "price": "$220–$300"
+          "desc": "Infuses amino acids, proteins, silk & pearl. Results last 4–5 months. Short $220 · Medium $250 · Long $300."
         }
       ]
     }
@@ -136,19 +142,43 @@
     "quote": "Her passion for hairstyling stems from a deep desire to find joy in creativity while making a meaningful difference in people's lives. Hair is more than just hair — it is a part of our identity, culture, and life experience."
   },
   "videos": [
-    { "streamId": "ca2acd08c2114ee8900e6d5c980d632d", "label": "" },
-    { "streamId": "8a0a3f1b9e9a439a8dfc34d04fe10bfb", "label": "" },
-    { "streamId": "a9e8179b6589407798f7adcc14243624", "label": "" },
-    { "streamId": "0493d339ae3044648ff8471794d03f24", "label": "" },
-    { "streamId": "56c0524c1a0c45e8b82d6f5675b5a450", "label": "" },
-    { "streamId": "92a0a8cf13a84055ade23fccd6604596", "label": "" }
+    {
+      "streamId": "ca2acd08c2114ee8900e6d5c980d632d",
+      "label": ""
+    },
+    {
+      "streamId": "8a0a3f1b9e9a439a8dfc34d04fe10bfb",
+      "label": ""
+    },
+    {
+      "streamId": "a9e8179b6589407798f7adcc14243624",
+      "label": ""
+    },
+    {
+      "streamId": "0493d339ae3044648ff8471794d03f24",
+      "label": ""
+    },
+    {
+      "streamId": "56c0524c1a0c45e8b82d6f5675b5a450",
+      "label": ""
+    },
+    {
+      "streamId": "92a0a8cf13a84055ade23fccd6604596",
+      "label": ""
+    }
   ],
   "contact": {
     "phone": "910-992-0117",
     "location": "North Carolina",
     "socials": [
-      { "platform": "Facebook", "url": "https://www.facebook.com/DiversehairDesignsbyPeachie" },
-      { "platform": "Instagram", "url": "https://www.instagram.com/diversehdbypeachie" }
+      {
+        "platform": "Facebook",
+        "url": "https://www.facebook.com/DiversehairDesignsbyPeachie"
+      },
+      {
+        "platform": "Instagram",
+        "url": "https://www.instagram.com/diversehdbypeachie"
+      }
     ]
   },
   "newsletter": {
