@@ -93,15 +93,16 @@ body::after {
 }
 
 .nav-logo img {
-  height: 55px;
+  height: 70px;
   width: auto;
   object-fit: contain;
   transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   filter: brightness(0);
+  margin-left: -0.75rem;
 }
 
 .nav.scrolled .nav-logo img {
-  height: 45px;
+  height: 55px;
 }
 
 .nav-logo-text {
@@ -1502,8 +1503,8 @@ body::after {
   /* Nav */
   .nav { height: 68px; padding: 0 1rem; }
   .nav.scrolled { height: 60px; }
-  .nav-logo img { height: 40px; }
-  .nav.scrolled .nav-logo img { height: 36px; }
+  .nav-logo img { height: 50px; margin-left: -0.5rem; }
+  .nav.scrolled .nav-logo img { height: 44px; }
   .nav-logo-text { font-size: 1rem; }
   .nav-logo { gap: 0.5rem; }
 
@@ -1579,6 +1580,148 @@ body::after {
   .about-stat-num { font-size: 2rem; }
 }
 
+/* ========== HERO MOSAIC ========== */
+.hero-mosaic {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-mosaic-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 20px rgba(42, 42, 42, 0.1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.hero-mosaic-img:hover {
+  transform: scale(1.12);
+  border-color: var(--gold-light);
+}
+
+.hero-mosaic-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========== SERVICE CARD IMAGES ========== */
+.service-card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.95);
+}
+
+.service-card:hover .service-card-img {
+  opacity: 1;
+  filter: brightness(1);
+}
+
+/* ========== ABOUT REAL IMAGE ========== */
+.about-image-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========== SHOWCASE STRIP ========== */
+.showcase-strip {
+  display: flex;
+  overflow: hidden;
+  gap: 0;
+  position: relative;
+}
+
+.showcase-strip::before,
+.showcase-strip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.showcase-strip::before {
+  left: 0;
+  background: linear-gradient(to right, var(--cream), transparent);
+}
+
+.showcase-strip::after {
+  right: 0;
+  background: linear-gradient(to left, var(--white), transparent);
+}
+
+.showcase-strip-item {
+  flex: 1;
+  min-width: 0;
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+}
+
+.showcase-strip-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.showcase-strip-item:hover img {
+  transform: scale(1.08);
+}
+
+.showcase-strip-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 0.75rem 0.5rem;
+  background: linear-gradient(to top, rgba(42, 42, 42, 0.6), transparent);
+  font-family: var(--body);
+  font-size: 0.55rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 246, 242, 0.9);
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .showcase-strip-item { height: 100px; }
+  .showcase-strip-item:nth-child(n+6) { display: none; }
+  .service-card-img { height: 160px; }
+}
+
+@media (max-width: 600px) {
+  .hero-mosaic { gap: 0.4rem; margin-top: 2rem; }
+  .hero-mosaic-img { width: 56px; height: 56px; }
+  .showcase-strip-item { height: 80px; }
+  .showcase-strip-item:nth-child(n+5) { display: none; }
+  .showcase-strip-label { font-size: 0.5rem; padding: 1rem 0.5rem 0.35rem; }
+  .service-card-img { height: 140px; }
+}
+
+@media (max-width: 380px) {
+  .hero-mosaic-img { width: 48px; height: 48px; }
+  .showcase-strip-item:nth-child(n+4) { display: none; }
+}
+
 /* Touch device hover fix */
 @media (hover: none) {
   .portfolio-item::before { display: none; }
@@ -1639,21 +1782,36 @@ body::after {
     <a href="booking.html" target="_blank" rel="noopener" class="hero-cta reveal reveal-delay-3">
       <span>Book Your Experience</span>
     </a>
+    <div class="hero-mosaic reveal reveal-delay-4">
+      <div class="hero-mosaic-img"><img src="images/service-color1.jpg" alt="Color work" loading="lazy"></div>
+      <div class="hero-mosaic-img"><img src="gallery/05.jpeg" alt="Balayage" loading="lazy"></div>
+      <div class="hero-mosaic-img"><img src="gallery/15.jpeg" alt="Hair styling" loading="lazy"></div>
+      <div class="hero-mosaic-img"><img src="images/service-highlights1.jpg" alt="Highlights" loading="lazy"></div>
+      <div class="hero-mosaic-img"><img src="gallery/22.jpeg" alt="Transformation" loading="lazy"></div>
+    </div>
   </div>
   <a href="#about" class="hero-scroll">
     <span>Scroll</span>
   </a>
 </section>
 
+<!-- Showcase Strip -->
+<div class="showcase-strip">
+  <div class="showcase-strip-item"><img src="gallery/03.jpeg" alt="Color" loading="lazy"><span class="showcase-strip-label">Color</span></div>
+  <div class="showcase-strip-item"><img src="gallery/10.jpeg" alt="Balayage" loading="lazy"><span class="showcase-strip-label">Balayage</span></div>
+  <div class="showcase-strip-item"><img src="gallery/18.jpeg" alt="Highlights" loading="lazy"><span class="showcase-strip-label">Highlights</span></div>
+  <div class="showcase-strip-item"><img src="gallery/25.jpeg" alt="Cut &amp; Style" loading="lazy"><span class="showcase-strip-label">Cut & Style</span></div>
+  <div class="showcase-strip-item"><img src="gallery/30.jpeg" alt="Styling" loading="lazy"><span class="showcase-strip-label">Styling</span></div>
+  <div class="showcase-strip-item"><img src="gallery/40.jpeg" alt="Treatments" loading="lazy"><span class="showcase-strip-label">Treatments</span></div>
+  <div class="showcase-strip-item"><img src="gallery/50.jpeg" alt="Transformation" loading="lazy"><span class="showcase-strip-label">Transformation</span></div>
+</div>
+
 <!-- About -->
 <section class="about section" id="about">
   <div class="about-inner">
     <div class="about-image reveal">
       <div class="about-image-inner">
-        <div class="about-image-icon">
-          <svg viewBox="0 0 80 80"><circle cx="40" cy="25" r="12"/><path d="M15 70c0-14 11-25 25-25s25 11 25 25"/></svg>
-          <span>Peachie</span>
-        </div>
+        <img src="images/hero-salon.jpg" alt="Diverse Hair Designs salon — Peachie at work">
       </div>
       <div class="about-image-frame"></div>
     </div>
@@ -1693,10 +1851,7 @@ body::after {
   <div class="services-grid">
     <!-- Color Services -->
     <div class="service-card reveal">
-      <svg class="service-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="24" cy="14" r="10"/>
-        <path d="M24 24v20M16 34h16"/>
-      </svg>
+      <img class="service-card-img" src="images/service-color1.jpg" alt="Hair color transformation" loading="lazy">
       <h3>Color</h3>
       <div class="service-item">
         <div>
@@ -1742,9 +1897,7 @@ body::after {
 
     <!-- Cutting -->
     <div class="service-card reveal reveal-delay-1">
-      <svg class="service-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M14 6l10 18M34 6L24 24M18 34a6 6 0 1 1-12 0 6 6 0 0 1 12 0zM42 34a6 6 0 1 1-12 0 6 6 0 0 1 12 0z"/>
-      </svg>
+      <img class="service-card-img" src="images/service-cut1.jpeg" alt="Precision haircut" loading="lazy">
       <h3>Cutting</h3>
       <div class="service-item">
         <div>
@@ -1770,9 +1923,7 @@ body::after {
 
     <!-- Styling -->
     <div class="service-card reveal reveal-delay-2">
-      <svg class="service-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M24 4c-6 8-16 14-16 26a16 16 0 0 0 32 0C40 18 30 12 24 4z"/>
-      </svg>
+      <img class="service-card-img" src="images/service-updo1.jpeg" alt="Special occasion styling" loading="lazy">
       <h3>Styling</h3>
       <div class="service-item">
         <div>
@@ -1786,10 +1937,7 @@ body::after {
 
     <!-- Treatments -->
     <div class="service-card reveal reveal-delay-3">
-      <svg class="service-card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M24 4v8M8 16h8M32 16h8M12 8l4 6M36 8l-4 6"/>
-        <circle cx="24" cy="30" r="14"/>
-      </svg>
+      <img class="service-card-img" src="images/service-treatment1.jpeg" alt="Scalp and hair treatments" loading="lazy">
       <h3>Treatments</h3>
       <div class="service-item">
         <div>
